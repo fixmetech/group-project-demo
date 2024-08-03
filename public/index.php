@@ -1,26 +1,8 @@
 <?php
 
-function show($stuff)
-{
-    echo "<pre>";
-    print_r($stuff);
-    echo "</pre>";
-}
-function splitURL()
-{
-    $URL = $_GET['url'] ?? 'home';
-    $URL = explode('/', $URL);
-    return $URL;
-}
-function loadController()
-{
-    $URL = splitURL();
+session_start();
 
-    $filename = "../app/controllers/" . ucfirst($URL[0]) . ".php";
-    if (file_exists($filename)) {
-        require $filename;
-    } else {
-        echo "controller not found";
-    }
-}
-loadController();
+require "../app/core/init.php";
+
+$app = new App();
+$app->loadController();
